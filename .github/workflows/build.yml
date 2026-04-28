@@ -34,6 +34,21 @@ jobs:
           IMAGE="europe-west1-docker.pkg.dev/hungerstation-hackathon-6957/build-day-25-repo/ingestion-service:${GITHUB_SHA}"
           echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
 
+      - name: Wait for Docker Daemon
+        run: |
+          echo "Waiting for Docker to start..."
+          # This loop tries to connect to the sidecar for up to 30 seconds
+          for i in {1..30}; do
+            if docker info > /dev/null 2>&1; then
+              echo "Docker is ready!"
+              exit 0
+            fi
+            echo "Still waiting..."
+            sleep 1
+          done
+          echo "Docker failed to start in time"
+          exit 1
+
       - name: Build image
         run: docker build -t "${{ steps.vars.outputs.image }}" .
 
