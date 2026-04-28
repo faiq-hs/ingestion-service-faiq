@@ -15,17 +15,16 @@ jobs:
   build:
     runs-on: actions-runner-controller
 
-    container:
-      image: google/cloud-sdk:slim
-      env:
-        DOCKER_HOST: tcp://localhost:2375
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Docker CLI
         run: |
-          apt-get update
-          apt-get install -y docker.io
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
       - name: Set image name
         id: vars
@@ -33,21 +32,6 @@ jobs:
           REPO_NAME=$(basename "$GITHUB_REPOSITORY")
           IMAGE="europe-west1-docker.pkg.dev/hungerstation-hackathon-6957/build-day-25-repo/ingestion-service:${GITHUB_SHA}"
           echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
-
-      - name: Wait for Docker Daemon
-        run: |
-          echo "Waiting for Docker to start..."
-          # This loop tries to connect to the sidecar for up to 30 seconds
-          for i in {1..30}; do
-            if docker info > /dev/null 2>&1; then
-              echo "Docker is ready!"
-              exit 0
-            fi
-            echo "Still waiting..."
-            sleep 1
-          done
-          echo "Docker failed to start in time"
-          exit 1
 
       - name: Build image
         run: docker build -t "${{ steps.vars.outputs.image }}" .
