@@ -84,7 +84,7 @@ spec:
           echo "Postgres is ready!"
       containers:
       - name: ingestion-service
-        image: europe-west1-docker.pkg.dev/hungerstation-hackathon-6957/build-day-25-repo/ingestion-service:ac481b4648418fc893fcd2979115840ef527773d
+        image: europe-west1-docker.pkg.dev/hungerstation-hackathon-6957/build-day-25-repo/ingestion-service:caf43ebab0a88f6eb3ff03091b880326f2c11e8e
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
