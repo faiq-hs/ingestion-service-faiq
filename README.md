@@ -1,3 +1,4 @@
+
 # Ingestion Service - Hackathon Challenge
 
 This is your team's ingestion service for the hackathon. Your goal is to optimize this service to handle high-volume event traffic from the control server while maintaining low latency and high reliability.
