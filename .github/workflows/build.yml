@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: arc-runner-set
+    runs-on: actions-runner-controller
 
     container:
       image: google/cloud-sdk:slim

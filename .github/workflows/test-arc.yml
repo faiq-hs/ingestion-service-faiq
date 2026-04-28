@@ -4,7 +4,7 @@ on: workflow_dispatch # Manual trigger
 jobs:
   test-burst:
     # IMPORTANT: This must match the 'installationName' from your values.yaml
-    runs-on: arc-runner-set 
+    runs-on: actions-runner-controller 
     strategy:
       matrix:
         # This will trigger 20 jobs at once
