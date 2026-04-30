@@ -5,7 +5,6 @@ This is your team's ingestion service for the hackathon. Your goal is to optimiz
 
 ## Prerequisites
 
-
 ### Required Tools
 
 Install the following tools before getting started:
